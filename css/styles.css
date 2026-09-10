@@ -1,0 +1,36 @@
+.day-header-row th {
+    background-color: #83b8ca;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.empty {
+    background-color: #aaaaaa;
+}
+
+.lecture {
+    background-color: #fffde7; 
+}
+
+.practice {
+    background-color: #e8f5e9; 
+}
+
+.practice-alt {
+    background-color: #2bb3c0; 
+    color: black;
+}
+
+.lab-teal {
+    background-color: #2bb3c0; 
+    color: black;
+}
+
+.lab-blue {
+    background-color: #d0e8ff; 
+}
+
+.seminar {
+    background-color: #fce4ec; 
+}
