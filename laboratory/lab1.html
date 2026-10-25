@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №1</title>
+</head>
+<body>
+
+    <p><a href="../profile.html">На головну сторінку (profile)</a></p>
+
+    <h1>Лабораторна робота №1</h1>
+    
+    <h2>Форма реєстрації</h2>
+
+    <!-- Форма з атрибутом action для webhook.site -->
+    <form action="https://webhook.site/23492fd4-6655-45ed-97a6-ba70c6765d3a" method="POST">
+        
+        <p>
+            <label for="first-name">Ім'я:</label><br>
+            <input type="text" id="first-name" name="first_name" required>
+        </p>
+
+        <p>
+            <label for="last-name">Прізвище:</label><br>
+            <input type="text" id="last-name" name="last_name" required>
+        </p>
+
+        <p>
+            <label for="email">Електронна пошта:</label><br>
+            <input type="email" id="email" name="email" required>
+        </p>
+
+        <p>
+            <label for="password">Пароль:</label><br>
+            <input type="password" id="password" name="password" required>
+        </p>
+
+        <p>
+            <label for="confirm-password">Підтвердження паролю:</label><br>
+            <input type="password" id="confirm-password" name="confirm_password" required>
+        </p>
+
+        <p>
+            <label for="birth-date">Дата народження:</label><br>
+            <input type="date" id="birth-date" name="birth_date">
+        </p>
+
+        <p>
+            <label for="gender">Стать:</label><br>
+            <select id="gender" name="gender">
+                <option value="">-- Оберіть стать --</option>
+                <option value="female">Жіноча</option>
+                <option value="male">Чоловіча</option>
+                <option value="other">Інша</option>
+            </select>
+        </p>
+
+        <p>
+            <input type="submit" value="Відправити">
+        </p>
+
+    </form>
+
+</body>
+</html>
