@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №4 — Weekly Plan</title>
+    <!-- Підключення кастомних шрифтів з Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="lab4.css">
+</head>
+<body>
+
+    <!-- Навігація назад на головну -->
+    <nav class="top-nav-back">
+        <a href="../index.html">← На головну сторінку (index.html)</a>
+    </nav>
+
+    <div class="planner-container">
+        
+        <!-- Шапка планера -->
+        <header class="planner-header">
+            <h1 class="planner-title">WEEKLY PLAN</h1>
+            <div class="header-inputs">
+                <div class="input-group">
+                    <label>WEEK OF</label>
+                    <input type="text" placeholder="...">
+                </div>
+                <div class="input-group">
+                    <label>HEALTHY HABIT</label>
+                    <input type="text" placeholder="...">
+                </div>
+            </div>
+            <div class="legend-box">
+                <span>ROCKED IT <input type="checkbox" disabled></span>
+                <span>ROOM FOR IMPROVEMENT <input type="checkbox" disabled></span>
+            </div>
+        </header>
+
+        <!-- Основна Grid-сітка планера -->
+        <main class="planner-grid">
+            
+            <!-- Ліва колонка (Цілі, Щоденні справи, Наступний тиждень) -->
+            <section class="left-sidebar">
+                
+                <!-- Блок 1: Top 3 Goals -->
+                <div class="section-block">
+                    <h3>TOP 3 GOALS</h3>
+                    <div class="goal-row"><input type="checkbox"><input type="text"></div>
+                    <div class="goal-row"><input type="checkbox"><input type="text"></div>
+                    <div class="goal-row"><input type="checkbox"><input type="text"></div>
+                </div>
+
+                <!-- Блок 2: Everything Else -->
+                <div class="section-block flex-grow">
+                    <h3>EVERYTHING ELSE</h3>
+                    <div class="todo-list">
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                        <div class="todo-row"><input type="checkbox"><input type="text"></div>
+                    </div>
+                </div>
+
+                <!-- Блок 3: Next Week -->
+                <div class="section-block">
+                    <h3>NEXT WEEK</h3>
+                    <div class="goal-row"><input type="checkbox"><input type="text"></div>
+                    <div class="goal-row"><input type="checkbox"><input type="text"></div>
+                    <div class="goal-row"><input type="checkbox"><input type="text"></div>
+                    <div class="goal-row"><input type="checkbox"><input type="text"></div>
+                </div>
+
+            </section>
+
+            <!-- дні тижня (Grid-елементи) -->
+            <div class="day-card">
+                <div class="day-header"><span>MONDAY</span><input type="checkbox"></div>
+                <div class="day-content"><textarea placeholder="Замітки на понеділок..."></textarea></div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header"><span>TUESDAY</span><input type="checkbox"></div>
+                <div class="day-content"><textarea placeholder="Замітки на вівторок..."></textarea></div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header"><span>WEDNESDAY</span><input type="checkbox"></div>
+                <div class="day-content"><textarea placeholder="Замітки на середу..."></textarea></div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header"><span>THURSDAY</span><input type="checkbox"></div>
+                <div class="day-content"><textarea placeholder="Замітки на четвер..."></textarea></div>
+            </div>
+
+            <div class="day-card">
+                <div class="day-header"><span>FRIDAY</span><input type="checkbox"></div>
+                <div class="day-content"><textarea placeholder="Замітки на п'ятницю..."></textarea></div>
+            </div>
+
+            <!-- Субота та неділя об'єднані у праву колонку днів вихідних -->
+            <div class="weekend-column">
+                <div class="day-card saturday">
+                    <div class="day-header"><span>SATURDAY</span><input type="checkbox"></div>
+                    <div class="day-content"><textarea placeholder="Субота..."></textarea></div>
+                </div>
+                <div class="day-card sunday">
+                    <div class="day-header"><span>SUNDAY</span><input type="checkbox"></div>
+                    <div class="day-content"><textarea placeholder="Неділя..."></textarea></div>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>
