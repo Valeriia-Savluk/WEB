@@ -1,0 +1,272 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    /* Використання лінійного градієнта для фону сторінки (тема лекції) */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    min-height: 100vh;
+    padding: 20px;
+    position: relative;
+}
+
+/* Навігація назад */
+.top-nav-back {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    z-index: 100;
+}
+
+.top-nav-back a {
+    text-decoration: none;
+    color: #065fd4;
+    font-weight: 600;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+/* ЗАФІКСОВАНЕ ПОСИЛАННЯ НА ТЕМПЛЕЙТ (Вимога згідно завдання) */
+.fixed-template-link {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #6c5ce7;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    box-shadow: 0 8px 20px rgba(108, 92, 231, 0.4);
+    z-index: 1000;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.fixed-template-link:hover {
+    background: #5b4bc4;
+    transform: translateY(-3px);
+}
+
+/* Головний контейнер портфоліо */
+.portfolio-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #ffffff;
+    border-radius: 24px;
+    /* Багатошарова тінь елемента (тема лекції) */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0,0,0,0.05);
+    overflow: hidden;
+    padding: 40px;
+}
+
+/* Навбар */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 700;
+    color: #2d3436;
+}
+
+.logo span {
+    color: #6c5ce7;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #636e72;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover {
+    color: #6c5ce7;
+}
+
+/* Герой секція (Hero) */
+.hero-section {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    gap: 40px;
+    margin-bottom: 60px;
+}
+
+.badge {
+    display: inline-block;
+    background: #e1e1fc;
+    color: #6c5ce7;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.hero-content h1 {
+    font-size: 38px;
+    line-height: 1.2;
+    color: #2d3436;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    color: #636e72;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 24px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.2s;
+}
+
+.primary-btn {
+    background: #6c5ce7;
+    color: white;
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.3);
+}
+
+.primary-btn:hover {
+    background: #5b4bc4;
+}
+
+.secondary-btn {
+    background: #f1f2f6;
+    color: #2d3436;
+}
+
+.secondary-btn:hover {
+    background: #dfe4ea;
+}
+
+/* Обгортка контентного зображення з використанням object-fit (тема лекції) */
+.hero-image-wrapper {
+    width: 100%;
+    height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    position: relative;
+}
+
+.content-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Заповнює контейнер зі збереженням пропорцій */
+    display: block;
+}
+
+/* Використання псевдоелемента ::before (тема лекції) як декоративного акценту */
+.hero-image-wrapper::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(108, 92, 231, 0.3), transparent);
+    z-index: 1;
+}
+
+/* Секція проєктів */
+.section-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #2d3436;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.project-card {
+    background: #f8f9fa;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+
+.card-thumb {
+    width: 100%;
+    height: 160px;
+}
+
+.card-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.card-info {
+    padding: 16px;
+}
+
+.card-info h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #2d3436;
+}
+
+.card-info p {
+    font-size: 13px;
+    color: #636e72;
+    line-height: 1.4;
+}
+
+/* Футер */
+.footer {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+    color: #b2bec3;
+    font-size: 13px;
+}
+
+/* Адаптивність */
+@media (max-width: 850px) {
+    .hero-section {
+        grid-template-columns: 1fr;
+    }
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+}
