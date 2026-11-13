@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №5 — Портфоліо / UI Template</title>
+    <!-- Кастомні шрифти Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="lab5.css">
+</head>
+<body>
+
+    <!-- Навігація назад на головну сторінку -->
+    <nav class="top-nav-back">
+        <a href="../index.html">← На головну сторінку (index.html)</a>
+    </nav>
+
+    <!-- Зафіксоване посилання на Figma-темплейт -->
+    <a href="https://www.figma.com" target="_blank" class="fixed-template-link">
+        🔗 Figma Template
+    </a>
+
+    <!-- Головний контейнер портфоліо -->
+    <div class="portfolio-container">
+        
+        <!-- Шапка / Навбар -->
+        <header class="navbar">
+            <div class="logo">Valeriia.<span>Dev</span></div>
+            <ul class="nav-links">
+                <li><a href="#about">Про мене</a></li>
+                <li><a href="#projects">Проєкти</a></li>
+                <li><a href="#skills">Навички</a></li>
+                <li><a href="#contact">Контакти</a></li>
+            </ul>
+        </header>
+
+        <!-- Головний екран (Hero section) -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <span class="badge">Веб-розробниця / Студентка ДУІКТ</span>
+                <h1>Створюю сучасні та адаптивні веб-інтерфейси</h1>
+                <p>Лабораторна робота №5: практичне застосування розширених стилів CSS, градієнтів, псевдоелементів та контентних зображень.</p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn primary-btn">Мої роботи</a>
+                    <a href="#contact" class="btn secondary-btn">Зв'язатися</a>
+                </div>
+            </div>
+            
+            <!-- Місце для твого особистого фото -->
+            <div class="hero-image-wrapper">
+                <div class="hero-image-wrapper">
+                <img src="../photo.jpg" alt="Моє фото" class="content-photo">
+            </div>
+            </div>
+        </section>
+
+        <!-- Секція проєктів із твоїми реальними роботами -->
+        <section id="projects" class="projects-section">
+            <h2 class="section-title">Мої лабораторні та практичні проєкти</h2>
+            <div class="projects-grid">
+                
+                <!-- Проєкт 1 -->
+                <div class="project-card">
+                    <div class="card-thumb">
+                        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=500&auto=format&fit=crop&q=60" alt="YouTube Layout">
+                    </div>
+                    <div class="card-info">
+                        <h3>YouTube Flexbox Layout</h3>
+                        <p>Практична/Лабораторна робота: точна копія головної сторінки YouTube з використанням Flexbox.</p>
+                        <a href="../laboratory/lab3.html" class="project-link">Відкрити роботу →</a>
+                    </div>
+                </div>
+
+                <!-- Проєкт 2 -->
+                <div class="project-card">
+                    <div class="card-thumb">
+                        <img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?w=500&auto=format&fit=crop&q=60" alt="Keyboard Grid">
+                    </div>
+                    <div class="card-info">
+                        <h3>Fullsize Keyboard Grid</h3>
+                        <p>Практична робота: повнорозмірна комп'ютерна клавіатура за допомогою двовимірної сітки CSS Grid.</p>
+                        <a href="../practice/pr4.html" class="project-link">Відкрити роботу →</a>
+                    </div>
+                </div>
+
+                <!-- Проєкт 3 -->
+                <div class="project-card">
+                    <div class="card-thumb">
+                        <img src="https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=500&auto=format&fit=crop&q=60" alt="Weekly Planner">
+                    </div>
+                    <div class="card-info">
+                        <h3>Weekly Planner UI</h3>
+                        <p>Лабораторна робота: зручний планер завдань із клікабельними чекбоксами та полями вводу.</p>
+                        <a href="../laboratory/lab4.html" class="project-link">Відкрити роботу →</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Футер -->
+        <footer id="contact" class="footer">
+            <p>© 2026 Валерія Савлук | ДУІКТ. Усі права захищено.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
