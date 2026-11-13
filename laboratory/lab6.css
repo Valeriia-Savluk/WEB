@@ -1,0 +1,126 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    height: 100vh;
+}
+
+.top-nav-back {
+    position: absolute;
+    top: 15px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.top-nav-back a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: bold;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 8px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+}
+
+/* Сцена з анімованим фоном (Вимога №2: анімація фону / градієнт / паралакс) */
+.scene {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298, #ff7e5f);
+    background-size: 300% 300%;
+    animation: bgAnimation 12s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ключові кадри для циклічної зміни градієнта фону */
+@keyframes bgAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Анімація хмар (рух фону) */
+.cloud {
+    position: absolute;
+    top: 15%;
+    width: 150px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50px;
+    animation: moveClouds 20s linear infinite;
+}
+
+.cloud-2 {
+    top: 30%;
+    width: 100px;
+    height: 40px;
+    animation-duration: 28s;
+    animation-delay: -5s;
+    opacity: 0.2;
+}
+
+@keyframes moveClouds {
+    from { transform: translateX(-200px); }
+    to { transform: translateX(calc(100vw + 200px)); }
+}
+
+/* Контейнер для покемона (Вимога №1: анімація руху/стрибків спрайта) */
+.pokemon-container {
+    position: absolute;
+    bottom: 20%;
+    animation: walkAcross 8s ease-in-out infinite alternate, jump 0.6s ease-in-out infinite alternate;
+}
+
+/* Спрайт покемона (використовуємо реальний спрайт або якісну іконку як приклад) */
+.pokemon-sprite {
+    width: 120px;
+    height: 120px;
+    /* Приклад спрайта покемона з офіційної бази або власне зображення */
+    background-image: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/25.gif');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+/* Анімація переміщення по горизонталі */
+@keyframes walkAcross {
+    0% { transform: translateX(-300px) scaleX(1); }
+    49% { transform: translateX(300px) scaleX(1); }
+    50% { transform: translateX(300px) scaleX(-1); }
+    99% { transform: translateX(-300px) scaleX(-1); }
+    100% { transform: translateX(-300px) scaleX(1); }
+}
+
+/* Ефект легких стрибків під час ходьби */
+@keyframes jump {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-25px); }
+}
+
+/* Текстовий блок на сцені */
+.scene-info {
+    position: absolute;
+    bottom: 40px;
+    text-align: center;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.4);
+    pointer-events: none;
+}
+
+.scene-info h1 {
+    font-size: 28px;
+    margin-bottom: 6px;
+}
+
+.scene-info p {
+    font-size: 14px;
+    opacity: 0.8;
+}
