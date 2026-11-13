@@ -1,0 +1,248 @@
+/* Глобальне скидання за стандартами Flexbox та box-sizing */
+*::before,
+*::after,
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+.top-nav-back {
+    padding: 10px 20px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.top-nav-back a {
+    text-decoration: none;
+    color: #065fd4;
+    font-weight: bold;
+}
+
+/* Головний контейнер YouTube */
+.youtube-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Шапка сайту (Header) з використанням Flexbox */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    height: 56px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.menu-icon {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.logo {
+    font-size: 18px;
+    letter-spacing: -1px;
+}
+
+.sub-logo {
+    font-size: 10px;
+    color: #606060;
+    vertical-align: top;
+}
+
+/* Пошук у шапці */
+.search-area {
+    display: flex;
+    align-items: center;
+    width: 40%;
+    max-width: 600px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 40px 0 0 40px;
+    outline: none;
+    font-size: 14px;
+}
+
+.search-btn {
+    padding: 8px 20px;
+    background-color: #f8f8f8;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-radius: 0 40px 40px 0;
+    cursor: pointer;
+}
+
+.user-area {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.avatar {
+    background-color: #1976d2;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+
+/* Основний макет (Сайдбар + контент поруч) */
+.main-layout {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+}
+
+/* Сайдбар (ліве меню) */
+.sidebar {
+    width: 240px;
+    padding: 12px;
+    background-color: #ffffff;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.sidebar-list {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+.sidebar-list li {
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.sidebar-list li:hover, .sidebar-list li.active {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.sidebar-title {
+    font-weight: bold;
+    font-size: 14px;
+    padding: 4px 12px;
+    color: #030303;
+}
+
+.sidebar hr {
+    border: none;
+    border-top: 1px solid #e5e5e5;
+    margin: 10px 0;
+}
+
+/* Контентна частина */
+.content {
+    flex: 1;
+    padding: 24px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+}
+
+/* Панель фільтрів */
+.filter-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.filter-tag {
+    padding: 6px 12px;
+    background-color: #0000000d;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.filter-tag.active {
+    background-color: #030303;
+    color: #ffffff;
+}
+
+/* Сітка відео карток через Flexbox */
+.video-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.video-card {
+    width: calc(25% - 12px);
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 140px;
+    background-color: #ddd;
+    border-radius: 12px;
+    position: relative;
+    background-image: linear-gradient(45deg, #ccc, #eee);
+}
+
+.thumbnail span {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 3px 6px;
+    font-size: 11px;
+    border-radius: 4px;
+}
+
+.video-info {
+    display: flex;
+    margin-top: 10px;
+    gap: 12px;
+}
+
+.channel-icon {
+    width: 36px;
+    height: 36px;
+    background-color: #bbb;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.video-details h4 {
+    font-size: 14px;
+    color: #0f0f0f;
+    line-height: 1.4;
+    margin-bottom: 4px;
+}
+
+.channel-name, .video-stats {
+    font-size: 12px;
+    color: #606060;
+}
