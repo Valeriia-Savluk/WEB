@@ -1,0 +1,262 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    color: #0f0f0f;
+}
+
+.back-nav {
+    padding: 8px 16px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+}
+
+.back-nav a {
+    text-decoration: none;
+    color: #065fd4;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Головний контейнер: Лівий сайдбар + Права основна зона */
+.yt-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* --- ЛІВА ЧАСТИНА (Сайдбар) --- */
+.sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 4px 12px;
+}
+
+.menu-btn {
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.logo {
+    font-size: 18px;
+}
+
+.logo sup {
+    font-size: 10px;
+    color: #606060;
+    margin-left: 2px;
+}
+
+.sidebar-section {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #e5e5e5;
+    padding-bottom: 12px;
+}
+
+.sidebar-section:last-child {
+    border-bottom: none;
+}
+
+.section-title {
+    font-size: 15px;
+    font-weight: bold;
+    padding: 6px 12px;
+}
+
+.nav-item {
+    text-decoration: none;
+    color: #0f0f0f;
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.nav-item:hover,
+.nav-item.active {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* --- ПРАВА ЧАСТИНА (Пошук, фільтри, сітка відео) --- */
+.main-area {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+    overflow-x: hidden;
+}
+
+/* Верхня панель з пошуком */
+.topbar {
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-box {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    width: 50%;
+    max-width: 550px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 20px 0 0 20px;
+    font-size: 14px;
+    outline: none;
+}
+
+.search-btn {
+    padding: 8px 18px;
+    border: 1px solid #ccc;
+    border-left: none;
+    background-color: #f8f8f8;
+    border-radius: 0 20px 20px 0;
+    cursor: pointer;
+}
+
+.mic-btn {
+    margin-left: 12px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f2f2f2;
+    cursor: pointer;
+}
+
+.topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 18px;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: #00897b;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Панель тегів-фільтрів */
+.chips-bar {
+    display: flex;
+    gap: 10px;
+    padding: 12px 0;
+    overflow-x: auto;
+}
+
+.chip {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 8px;
+    background-color: #f2f2f2;
+    font-size: 13px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.chip.active {
+    background-color: #0f0f0f;
+    color: #ffffff;
+}
+
+/* Сітка відео (4 колонки через Flexbox) */
+.videos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    padding-top: 12px;
+}
+
+.video-card {
+    width: calc(25% - 12px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.thumb {
+    width: 100%;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background-color: #e5e5e5;
+}
+
+.thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.duration {
+    position: absolute;
+    bottom: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #ffffff;
+    font-size: 11px;
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.video-meta {
+    display: flex;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #bdbdbd;
+    flex-shrink: 0;
+}
+
+.texts h4 {
+    font-size: 14px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+}
+
+.texts p {
+    font-size: 12px;
+    color: #606060;
+    line-height: 1.4;
+}
