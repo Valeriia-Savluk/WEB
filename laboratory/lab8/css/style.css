@@ -1,0 +1,130 @@
+/* Базові стилі (Мобільна версія / Mobile-First підхід) */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif, Arial, sans-serif;
+    background: linear-gradient(135deg, #1f4068, #162447);
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+}
+
+.back-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.back-nav__link {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 8px 14px;
+    border-radius: 20px;
+    backdrop-filter: blur(5px);
+    transition: background 0.2s;
+}
+
+.back-nav__link:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+/* Картка портфоліо за замовчуванням (мобільні пристрої: елементи йдуть у стовпчик) */
+.portfolio {
+    width: 100%;
+    max-width: 600px;
+}
+
+.portfolio__card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column; /* На мобільних фото зверху, текст знизу */
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+}
+
+.portfolio__photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #1f4068;
+}
+
+.portfolio__name {
+    font-size: 24px;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+}
+
+.portfolio__role {
+    font-size: 14px;
+    color: #e43f5a;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.portfolio__desc {
+    font-size: 14px;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.portfolio__btn {
+    display: inline-block;
+    background: #e43f5a;
+    color: #ffffff;
+    padding: 10px 24px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.portfolio__btn:hover {
+    background: #d90429;
+    transform: translateY(-2px);
+}
+
+/* МЕДІА-ЗАПИТ ДЛЯ ПЛАНШЕТІВ ТА ДЕСКТОПІВ (мін. ширина 768px) */
+@media screen and (min-width: 768px) {
+    .portfolio {
+        max-width: 750px;
+    }
+
+    .portfolio__card {
+        flex-direction: row; /* На ширших екранах фото зліва, а текст справа */
+        text-align: left;
+        padding: 40px;
+        gap: 30px;
+    }
+
+    .portfolio__photo {
+        width: 180px;
+        height: 180px;
+        flex-shrink: 0;
+    }
+
+    .portfolio__name {
+        font-size: 30px;
+    }
+
+    .portfolio__desc {
+        font-size: 15px;
+    }
+}
