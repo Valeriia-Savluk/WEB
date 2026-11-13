@@ -1,4 +1,4 @@
-/* Глобальне скидання за стандартами Flexbox та box-sizing */
+/* Глобальне скидання */
 *::before,
 *::after,
 * {
@@ -31,7 +31,7 @@ body {
     height: 100vh;
 }
 
-/* Шапка сайту (Header) з використанням Flexbox */
+/* Шапка сайту */
 .header {
     display: flex;
     justify-content: space-between;
@@ -64,7 +64,7 @@ body {
     vertical-align: top;
 }
 
-/* Пошук у шапці */
+/* Пошук */
 .search-area {
     display: flex;
     align-items: center;
@@ -108,14 +108,14 @@ body {
     font-weight: bold;
 }
 
-/* Основний макет (Сайдбар + контент поруч) */
+/* Основний макет */
 .main-layout {
     display: flex;
     flex: 1;
     overflow: hidden;
 }
 
-/* Сайдбар (ліве меню) */
+/* Сайдбар */
 .sidebar {
     width: 240px;
     padding: 12px;
@@ -155,7 +155,7 @@ body {
     margin: 10px 0;
 }
 
-/* Контентна частина */
+/* Контент */
 .content {
     flex: 1;
     padding: 24px;
@@ -163,7 +163,7 @@ body {
     background-color: #f9f9f9;
 }
 
-/* Панель фільтрів */
+/* Фільтри */
 .filter-bar {
     display: flex;
     gap: 10px;
@@ -187,7 +187,7 @@ body {
     color: #ffffff;
 }
 
-/* Сітка відео карток через Flexbox */
+/* Сітка відео через Flexbox */
 .video-grid {
     display: flex;
     flex-wrap: wrap;
@@ -201,13 +201,21 @@ body {
     margin-bottom: 20px;
 }
 
+/* Блок заставки */
 .thumbnail {
     width: 100%;
     height: 140px;
     background-color: #ddd;
     border-radius: 12px;
     position: relative;
-    background-image: linear-gradient(45deg, #ccc, #eee);
+    overflow: hidden; /* Щоб картинка не вилазила за скруглені кути */
+}
+
+.thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Рівномірне заповнення блоку */
+    display: block;
 }
 
 .thumbnail span {
@@ -221,6 +229,7 @@ body {
     border-radius: 4px;
 }
 
+/* Інформація про відео та аватари */
 .video-info {
     display: flex;
     margin-top: 10px;
@@ -230,9 +239,16 @@ body {
 .channel-icon {
     width: 36px;
     height: 36px;
-    background-color: #bbb;
     border-radius: 50%;
+    overflow: hidden;
     flex-shrink: 0;
+    background-color: #bbb;
+}
+
+.channel-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .video-details h4 {
