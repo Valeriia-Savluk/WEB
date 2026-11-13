@@ -1,0 +1,30 @@
+.snowfall {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+
+    &__flake {
+        position: absolute;
+        top: -10px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: fall linear infinite;
+
+        @for $i from 1 through 5 {
+            &:nth-child(#{$i}) {
+                left: unquote("#{$i * 20}%");
+                width: #{$i * 3 + 3}px;
+                height: #{$i * 3 + 3}px;
+                animation-duration: #{6 + $i * 2}s;
+                animation-delay: #{$i * 1.2}s;
+            }
+        }
+    }
+}
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) translateX(0); }
+    100% { transform: translateY(110vh) translateX(25px); }
+}

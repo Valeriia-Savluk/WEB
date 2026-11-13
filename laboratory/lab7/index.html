@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новорічна листівка — Лабораторна №7</title>
+    <!-- Підключення Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Підключення стилів із правильним відносним шляхом -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Навігація назад на головну сторінку проєкту (з урахуванням вкладеності виходимо на дві папки вгору) -->
+    <nav class="back-nav">
+        <a href="../../index.html" class="back-nav__link">← На головну сторінку</a>
+    </nav>
+
+    <!-- Головний блок листівки (БЕМ) -->
+    <main class="postcard">
+        
+        <header class="postcard__header">
+            <span class="postcard__badge">З Новим Роком!</span>
+            <h1 class="postcard__title">Щасливих свят!</h1>
+        </header>
+
+        <div class="postcard__content">
+            
+            <!-- Новорічна ялинка -->
+            <div class="tree">
+                <div class="tree__star">★</div>
+                <div class="tree__layer tree__layer--top"></div>
+                <div class="tree__layer tree__layer--middle"></div>
+                <div class="tree__layer tree__layer--bottom"></div>
+                <div class="tree__trunk"></div>
+            </div>
+
+            <!-- Привітання -->
+            <div class="greeting">
+                <p class="greeting__text">
+                    Нехай новий рік принесе у твоє життя натхнення, успіхи у веб-розробці, яскраві емоції та здійснення найзаповітніших мрій!
+                </p>
+                <div class="greeting__signature">
+                    Студентка ДУІКТ 🎄
+                </div>
+            </div>
+
+        </div>
+
+        <footer class="postcard__footer">
+            <button class="button button--primary" onclick="alert('🎄 Веселих свят та успішного захисту!')">
+                Натиснути на щастя ✨
+            </button>
+        </footer>
+
+    </main>
+
+    <!-- Ефект снігу -->
+    <div class="snowfall">
+        <div class="snowfall__flake"></div>
+        <div class="snowfall__flake"></div>
+        <div class="snowfall__flake"></div>
+        <div class="snowfall__flake"></div>
+        <div class="snowfall__flake"></div>
+    </div>
+
+</body>
+</html>

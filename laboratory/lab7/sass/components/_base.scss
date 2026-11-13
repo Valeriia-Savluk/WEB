@@ -1,0 +1,40 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, $bg-gradient-start, $bg-gradient-mid, $bg-gradient-end);
+    font-family: $font-main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    padding: 20px;
+}
+
+.back-nav {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+
+    &__link {
+        color: #ffffff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.15);
+        padding: 8px 16px;
+        border-radius: 20px;
+        backdrop-filter: blur(5px);
+        transition: background 0.2s;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+    }
+}

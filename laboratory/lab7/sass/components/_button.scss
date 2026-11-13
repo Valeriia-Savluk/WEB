@@ -1,0 +1,25 @@
+.button {
+    padding: 10px 24px;
+    border: none;
+    border-radius: 30px;
+    font-family: $font-main;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+
+    &--primary {
+        background: linear-gradient(135deg, $primary-color, darken($primary-color, 10%));
+        color: white;
+        box-shadow: 0 4px 12px rgba(192, 57, 43, 0.4);
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(192, 57, 43, 0.6);
+        }
+
+        &:active {
+            transform: translateY(1px);
+        }
+    }
+}
