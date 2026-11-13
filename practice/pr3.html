@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pr3.css">
+    <title>Практична робота №3 - YouTube Flexbox</title>
+</head>
+<body>
+
+    <nav class="back-nav">
+        <a href="../index.html">← На головну сторінку (index.html)</a>
+    </nav>
+
+    <!-- Головний Flex-контейнер (Ліва колонка + Права колонка) -->
+    <div class="yt-wrapper">
+
+        <!-- ЛІВА ЧАСТИНА (Синій блок на схемі) -->
+        <aside class="sidebar">
+            <!-- Логотип -->
+            <div class="sidebar-header">
+                <span class="menu-btn">☰</span>
+                <span class="logo">▶ <strong>Premium</strong><sup>UA</sup></span>
+            </div>
+
+            <!-- Червоний блок 1: Основне меню -->
+            <div class="sidebar-section">
+                <a href="#" class="nav-item active">🏠 Головна</a>
+                <a href="#" class="nav-item">⚡ YouTube Shorts</a>
+                <a href="#" class="nav-item">📺 Підписки</a>
+                <a href="#" class="nav-item">🎵 YouTube Music</a>
+            </div>
+
+            <!-- Червоний блок 2: Ви -->
+            <div class="sidebar-section">
+                <div class="section-title">Ви &gt;</div>
+                <a href="#" class="nav-item">👤 Ваш канал</a>
+                <a href="#" class="nav-item">🕒 Історія</a>
+                <a href="#" class="nav-item">🎬 Ваші відео</a>
+                <a href="#" class="nav-item">⏱️ Переглянути пізніше</a>
+                <a href="#" class="nav-item">⬇️ Завантаження</a>
+                <a href="#" class="nav-item">⌄ Показати більше</a>
+            </div>
+
+            <!-- Червоний блок 3: Підписки -->
+            <div class="sidebar-section">
+                <div class="section-title">Підписки</div>
+                <a href="#" class="nav-item">🔵 WAS: Популярн...</a>
+                <a href="#" class="nav-item">🟣 TheDRZJ</a>
+                <a href="#" class="nav-item">🟢 ROZETKA</a>
+                <a href="#" class="nav-item">🟠 Алексей Макар...</a>
+                <a href="#" class="nav-item">🟢 ROZETKA GAME...</a>
+                <a href="#" class="nav-item">🟡 Хащі</a>
+                <a href="#" class="nav-item">🔴 Клятий раціона...</a>
+                <a href="#" class="nav-item">⌄ Показати ще 24</a>
+            </div>
+        </aside>
+
+        <!-- ПРАВА ЧАСТИНА (Чорний блок на схемі) -->
+        <div class="main-area">
+            
+            <!-- Верхня панель пошуку -->
+            <header class="topbar">
+                <div class="search-box">
+                    <input type="text" placeholder="Пошук">
+                    <button class="search-btn">🔍</button>
+                    <button class="mic-btn">🎤</button>
+                </div>
+                <div class="topbar-actions">
+                    <span>📹</span>
+                    <span>🔔</span>
+                    <span class="user-avatar">В</span>
+                </div>
+            </header>
+
+            <!-- Червоний блок: Категорії-фільтри -->
+            <div class="chips-bar">
+                <button class="chip active">Усі</button>
+                <button class="chip">Ігри</button>
+                <button class="chip">Музика</button>
+                <button class="chip">Пряма трансляція</button>
+                <button class="chip">Новини</button>
+                <button class="chip">Пригодницький бойовик</button>
+                <button class="chip">Образотворчі мистецтва</button>
+                <button class="chip">Мультфільми</button>
+                <button class="chip">Нещодавні завантаження</button>
+                <button class="chip">Ви дивилися</button>
+            </div>
+
+            <!-- Сітка відео (2 ряди по 4 відео) -->
+            <main class="videos-container">
+                
+                <!-- Ряд 1 -->
+                <div class="video-card">
+                    <div class="thumb">
+                        <img src="https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?w=400&q=60" alt="Відео 1">
+                        <span class="duration">12:30</span>
+                    </div>
+                    <div class="video-meta">
+                        <div class="avatar"></div>
+                        <div class="texts">
+                            <h4>Як збільшився борг України за час великої війни? | Економічн...</h4>
+                            <p>Економічна правда</p>
+                            <p>78 тис. переглядів • 1 місяць тому</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="thumb">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=60" alt="Відео 2">
+                        <span class="duration">32:08</span>
+                    </div>
+                    <div class="video-meta">
+                        <div class="avatar"></div>
+                        <div class="texts">
+                            <h4>Що Бісить Журналістку | Марія Малевська</h4>
+                            <p>LUKI</p>
+                            <p>70 тис. переглядів • 4 місяці тому</p>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="video-card">
+                    <div class="thumb">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&q=60" alt="Відео 4">
+                        <span class="duration">4:46</span>
+                    </div>
+                    <div class="video-meta">
+                        <div class="avatar"></div>
+                        <div class="texts">
+                            <h4>How to Get Stuff Done When You Have ADHD</h4>
+                            <p>How to ADHD</p>
+                            <p>1,2 млн переглядів • 7 років тому</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ряд 2 -->
+                <div class="video-card">
+                    <div class="thumb">
+                        <img src="https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=400&q=60" alt="Відео 5">
+                        <span class="duration">23:59</span>
+                    </div>
+                    <div class="video-meta">
+                        <div class="avatar"></div>
+                        <div class="texts">
+                            <h4>«Це твоя лопата, копатимеш собі яму»: знайдено росіян, які...</h4>
+                            <p>BIHUS Info</p>
+                            <p>90 тис. переглядів • 1 день тому</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="thumb">
+                        <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?w=400&q=60" alt="Відео 6">
+                        <span class="duration">30:18</span>
+                    </div>
+                    <div class="video-meta">
+                        <div class="avatar"></div>
+                        <div class="texts">
+                            <h4>Neo-Brutalism: The Rising Design Trend</h4>
+                            <p>Halo Lab</p>
+                            <p>242 перегляди • 1 день тому</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="thumb">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=400&q=60" alt="Відео 7">
+                        <span class="duration">2:03</span>
+                    </div>
+                    <div class="video-meta">
+                        <div class="avatar"></div>
+                        <div class="texts">
+                            <h4>Лесь Подерв'янський Про бобра</h4>
+                            <p>Лесь Подерв'янський</p>
+                            <p>434 тис. переглядів • 5 років тому</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="thumb">
+                        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=400&q=60" alt="Відео 8">
+                        <span class="duration">20:19</span>
+                    </div>
+                    <div class="video-meta">
+                        <div class="avatar"></div>
+                        <div class="texts">
+                            <h4>Unveiling the Amazing Secret for Drawing the Perfect Portrait...</h4>
+                            <p>One pencil tutorial</p>
+                            <p>1,3 млн переглядів • 3 місяці тому</p>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+    </div>
+
+</body>
+</html>
