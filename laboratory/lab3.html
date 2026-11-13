@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="lab3.css">
+    <title>Лабораторна робота №3 - YouTube Flexbox Layout</title>
+</head>
+<body>
+
+    <!-- Посилання на головну сторінку -->
+    <nav class="top-nav-back">
+        <a href="../index.html">← На головну сторінку (index.html)</a>
+    </nav>
+
+    <!-- Головний контейнер сторінки YouTube -->
+    <div class="youtube-container">
+
+        <!-- Секція: Шапка (Header / Search) -->
+        <header class="header">
+            <div class="logo-area">
+                <span class="menu-icon">☰</span>
+                <span class="logo"><strong>YouTube</strong> <span class="sub-logo">UA</span></span>
+            </div>
+            <div class="search-area">
+                <input type="text" placeholder="Пошук" class="search-input">
+                <button class="search-btn">🔍</button>
+            </div>
+            <div class="user-area">
+                <span class="icon">➕</span>
+                <span class="icon">🔔</span>
+                <span class="avatar">В</span>
+            </div>
+        </header>
+
+        <!-- Основна робоча область (Сайдбар + Контент) -->
+        <div class="main-layout">
+
+            <!-- Бокове меню (Sidebar) -->
+            <aside class="sidebar">
+                <ul class="sidebar-list">
+                    <li class="active">🏠 Головна</li>
+                    <li>⚡ Shorts</li>
+                    <li>📺 Підписки</li>
+                    <li>🎵 YouTube Music</li>
+                </ul>
+                <hr>
+                <ul class="sidebar-list">
+                    <li class="sidebar-title">Ви</li>
+                    <li>👤 Ваш канал</li>
+                    <li>🕒 Історія</li>
+                    <li>🎬 Ваші відео</li>
+                    <li>⏱️ Переглянути пізніше</li>
+                </ul>
+                <hr>
+                <ul class="sidebar-list">
+                    <li class="sidebar-title">Підписки</li>
+                    <li>🟢 Ex Habit</li>
+                    <li>🟣 Chloe Ting</li>
+                    <li>🟢 ROZETKA</li>
+                    <li>🟢 Бунт у Бібліотеці</li>
+                </ul>
+            </aside>
+
+            <!-- Контентна частина (Відео та фільтри) -->
+            <main class="content">
+
+                <div class="filter-bar">
+                    <button class="filter-tag active">Усі</button>
+                    <button class="filter-tag">Ігри</button>
+                    <button class="filter-tag">Музика</button>
+                    <button class="filter-tag">Пряма трансляція</button>
+                    <button class="filter-tag">Новини</button>
+                    <button class="filter-tag">Анімація</button>
+                    <button class="filter-tag">Новинки для вас</button>
+                </div>
+
+                <!-- Сітка відео (Video Grid) -->
+                <div class="video-grid">
+
+                    <div class="video-card">
+                        <div class="thumbnail"><span>12:30</span></div>
+                        <div class="video-info">
+                            <div class="channel-icon"></div>
+                            <div class="video-details">
+                                <h4>Як збільшився борг України за час великої війни?</h4>
+                                <p class="channel-name">Економічна правда</p>
+                                <p class="video-stats">78 тис. переглядів • 1 місяць тому</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"><span>32:08</span></div>
+                        <div class="video-info">
+                            <div class="channel-icon"></div>
+                            <div class="video-details">
+                                <h4>Що Бісить Журналістку | Марія Малевська</h4>
+                                <p class="channel-name">LUKI</p>
+                                <p class="video-stats">70 тис. переглядів • 4 місяці тому</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"><span>30:40</span></div>
+                        <div class="video-info">
+                            <div class="channel-icon"></div>
+                            <div class="video-details">
+                                <h4>2016 nostagic playlist</h4>
+                                <p class="channel-name">Tunes for vibes</p>
+                                <p class="video-stats">5,5 млн. переглядів • 9 місяців тому</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="video-card">
+                        <div class="thumbnail"><span>4:46</span></div>
+                        <div class="video-info">
+                            <div class="channel-icon"></div>
+                            <div class="video-details">
+                                <h4>How to Get Stuff Done When You Have ADHD</h4>
+                                <p class="channel-name">How to ADHD</p>
+                                <p class="video-stats">1,2 млн переглядів • 7 років тому</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="video-card">
+                        <div class="thumbnail"><span>40:54</span></div>
+                        <div class="video-info">
+                            <div class="channel-icon"></div>
+                            <div class="video-details">
+                                <h4>Аферисти в сітях – Випуск 11 – Сезон 5 – 14.07.2020</h4>
+                                <p class="channel-name">Новий канал</p>
+                                <p class="video-stats">4 млн. переглядів • 6 років тому</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </main>
+
+        </div>
+    </div>
+
+</body>
+</html>
