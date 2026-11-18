@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="uk" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillSwap — Вчись, обмінюйся, зростай!</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              900: '#0B153D',
+              800: '#111D4A',
+              700: '#1B2B65',
+            },
+            brandBlue: '#2563EB',
+            brandEmerald: '#10B981',
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+    /* Custom scrollbar for chat inside prototype */
+    .custom-scroll::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scroll::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .custom-scroll::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- ================= STICKY HEADER ================= -->
+  <header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur-md border-b border-white/10 text-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16 md:h-20">
+        <!-- Brand Logo -->
+        <a href="#" class="flex items-center gap-3 group">
+          <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center shadow-md group-hover:scale-105 transition-transform">
+            <!-- Custom SVG S-Arrow Swap Logo -->
+            <svg class="w-7 h-7" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="SkillSwap Logo">
+              <!-- Top Blue Curved Arrow -->
+              <path d="M40 10L53 20.5L40 31V24.5H25C20.5817 24.5 17 28.0817 17 32.5C17 36.9183 20.5817 40.5 25 40.5H31L36.5 48.5H25C16.1634 48.5 9 41.3366 9 32.5C9 23.6634 16.1634 16.5 25 16.5H40V10Z" fill="#2563EB"/>
+              <!-- Bottom Emerald Curved Arrow -->
+              <path d="M24 54L11 43.5L24 33V39.5H39C43.4183 39.5 47 35.9183 47 31.5C47 27.0817 43.4183 23.5 39 23.5H33L27.5 15.5H39C47.8366 15.5 55 22.6634 55 31.5C55 40.3366 47.8366 47.5 39 47.5H24V54Z" fill="#10B981"/>
+            </svg>
+          </div>
+          <div>
+            <span class="text-xl font-extrabold tracking-tight block leading-none">SkillSwap</span>
+            <span class="text-[11px] text-emerald-400 font-medium tracking-wide">Вчись, обмінюйся, зростай!</span>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+          <a href="#problem" class="hover:text-white transition-colors">Проблема</a>
+          <a href="#solution" class="hover:text-white transition-colors">Рішення</a>
+          <a href="#prototype" class="text-emerald-400 hover:text-emerald-300 font-semibold transition-colors flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            Прототип MVP
+          </a>
+          <a href="#audience" class="hover:text-white transition-colors">Переваги</a>
+          <a href="#register" class="hover:text-white transition-colors">Контакти</a>
+        </nav>
+
+        <!-- Header CTA -->
+        <div class="hidden sm:flex items-center gap-3">
+          <a href="#register" class="px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold shadow-lg shadow-blue-600/25 transition-all">
+            Ранній доступ
+          </a>
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <button id="mobileMenuBtn" class="md:hidden p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/10 focus:outline-none" aria-label="Відкрити меню">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Dropdown Navigation -->
+    <div id="mobileMenu" class="hidden md:hidden bg-navy-800 border-t border-white/10 px-4 pt-3 pb-5 space-y-2">
+      <a href="#problem" class="block px-3 py-2.5 rounded-xl text-slate-200 hover:bg-white/10 font-medium">Проблема</a>
+      <a href="#solution" class="block px-3 py-2.5 rounded-xl text-slate-200 hover:bg-white/10 font-medium">Наше рішення</a>
+      <a href="#prototype" class="block px-3 py-2.5 rounded-xl text-emerald-400 bg-emerald-500/10 font-semibold">Інтерактивний прототип MVP</a>
+      <a href="#audience" class="block px-3 py-2.5 rounded-xl text-slate-200 hover:bg-white/10 font-medium">Для кого та переваги</a>
+      <a href="#register" class="block px-3 py-2.5 rounded-xl bg-blue-600 text-white text-center font-semibold mt-2">Приєднатися до раннього доступу</a>
+    </div>
+  </header>
+
+  <!-- ================= 1. HERO SECTION ================= -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-navy-900 via-navy-800 to-navy-900 text-white py-16 sm:py-24 lg:py-28">
+    <!-- Decorative Background Glows -->
+    <div class="absolute -top-24 -left-24 w-96 h-96 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute bottom-0 right-0 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <!-- Left Content -->
+        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/15 text-emerald-300 text-xs sm:text-sm font-semibold">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            Бартер «знання за знання» + класичне репетиторство
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+            SkillSwap — <br class="hidden sm:inline" />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400">
+              Вчись, обмінюйся, зростай!
+            </span>
+          </h1>
+
+          <p class="text-base sm:text-lg lg:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            Єдина безпечна платформа для бартерного обміну знаннями «знання за знання» та класичного репетиторства. Навчайся безкоштовно, ділячись власними навичками, або заробляй на своєму досвіді.
+          </p>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+            <a href="#prototype" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-navy-900 font-bold text-base shadow-xl shadow-emerald-500/25 transition-all flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              Спробувати прототип MVP
+            </a>
+            <a href="#register" class="w-full sm:w-auto px-7 py-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-semibold text-base transition-all text-center">
+              Приєднатися до раннього доступу
+            </a>
+          </div>
+
+          <!-- Quick Trust Metrics -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-white/10 max-w-lg mx-auto lg:mx-0">
+            <div>
+              <p class="text-2xl sm:text-3xl font-extrabold text-white">0 ₴</p>
+              <p class="text-xs text-slate-400">за бартерні уроки</p>
+            </div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-extrabold text-emerald-400">≤ 1%</p>
+              <p class="text-xs text-slate-400">комісія з платних сесій</p>
+            </div>
+            <div>
+              <p class="text-2xl sm:text-3xl font-extrabold text-blue-400">100%</p>
+              <p class="text-xs text-slate-400">захист через ескроу</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Visual Mockup Card: Live Swap Match Preview -->
+        <div class="lg:col-span-5">
+          <div class="glass-card rounded-3xl p-6 sm:p-7 shadow-2xl relative">
+            <div class="flex items-center justify-between mb-5">
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold">
+                <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                98% збіг інтересів (Match!)
+              </span>
+              <span class="text-xs text-slate-400 font-medium">Бартер 1:1</span>
+            </div>
+
+            <!-- Two Matched Users -->
+            <div class="space-y-4">
+              <!-- User A -->
+              <div class="bg-navy-900/80 border border-white/10 rounded-2xl p-4 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-bold text-lg text-white shrink-0">
+                    ОК
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <h3 class="font-bold text-white text-sm sm:text-base">Олена Коваленко</h3>
+                      <span class="px-2 py-0.5 rounded-md bg-blue-500/20 text-blue-300 text-[10px] font-semibold">Експерт</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">Навчає: <span class="text-emerald-400 font-semibold">UI/UX Дизайн (Figma)</span></p>
+                    <p class="text-xs text-slate-400">Вивчає: <span class="text-blue-300 font-semibold">Розмовна Англійська B2</span></p>
+                  </div>
+                </div>
+                <div class="text-right shrink-0">
+                  <span class="text-amber-400 font-bold text-sm">★ 4.9</span>
+                  <p class="text-[11px] text-slate-400">24 сесії</p>
+                </div>
+              </div>
+
+              <!-- Swap Connector Icon -->
+              <div class="flex justify-center -my-2 relative z-10">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-r from-blue-600 to-emerald-500 flex items-center justify-center shadow-lg border-2 border-navy-800">
+                  <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+                  </svg>
+                </div>
+              </div>
+
+              <!-- User B -->
+              <div class="bg-navy-900/80 border border-white/10 rounded-2xl p-4 flex items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                  <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center font-bold text-lg text-white shrink-0">
+                    СМ
+                  </div>
+                  <div>
+                    <div class="flex items-center gap-1.5">
+                      <h3 class="font-bold text-white text-sm sm:text-base">Софія Мельник</h3>
+                      <span class="px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 text-[10px] font-semibold">Студентка</span>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-0.5">Навчає: <span class="text-blue-300 font-semibold">Англійська мова (IELTS 7.5)</span></p>
+                    <p class="text-xs text-slate-400">Вивчає: <span class="text-emerald-400 font-semibold">Основи Figma</span></p>
+                  </div>
+                </div>
+                <div class="text-right shrink-0">
+                  <span class="text-amber-400 font-bold text-sm">★ 5.0</span>
+                  <p class="text-[11px] text-slate-400">11 сесій</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Escrow Status Bar -->
+            <div class="mt-5 pt-4 border-t border-white/10 flex items-center justify-between text-xs">
+              <span class="text-slate-300 flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                Захист угоди: 1 Skill-токен заморожено
+              </span>
+              <a href="#prototype" class="text-emerald-400 font-semibold hover:underline">Відкрити кімнату →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. PROBLEM SECTION ================= -->
+  <section id="problem" class="py-16 sm:py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-blue-600 font-bold text-sm uppercase tracking-wider">Аналіз проблеми</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy-900 mt-2">
+          Чому традиційне навчання часто гальмує розвиток?
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Ми дослідили досвід студентів, фрілансерів та початківців і виділили 3 головні бар’єри, які заважають швидко опановувати нові навички.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Problem Card 1 -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-14 h-14 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-red-600 uppercase tracking-wider">Проблема #1</span>
+          <h3 class="text-xl font-bold text-navy-900 mt-1 mb-3">
+            Висока вартість навчання та послуг репетиторів
+          </h3>
+          <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+            Класичні курси та індивідуальне менторство часто занадто дорогі для студентів і початківців. Водночас є ризик заплатити чималі гроші й отримати лише нудну теорію без практики.
+          </p>
+        </div>
+
+        <!-- Problem Card 2 -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-amber-600 uppercase tracking-wider">Проблема #2</span>
+          <h3 class="text-xl font-bold text-navy-900 mt-1 mb-3">
+            Складний і тривалий пошук «свого» наставника
+          </h3>
+          <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+            Пошук людей для взаємного обміну досвідом на форумах, у Telegram-чатах чи через знайомих забирає тижні й не гарантує збігу графіків чи рівня знань.
+          </p>
+        </div>
+
+        <!-- Problem Card 3 -->
+        <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200/80 hover:shadow-xl hover:-translate-y-1 transition-all">
+          <div class="w-14 h-14 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center mb-6">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <span class="text-xs font-bold text-indigo-600 uppercase tracking-wider">Проблема #3</span>
+          <h3 class="text-xl font-bold text-navy-900 mt-1 mb-3">
+            Незручність та недовіра при бартерних угодах
+          </h3>
+          <p class="text-slate-600 leading-relaxed text-sm sm:text-base">
+            Немає єдиного майданчика, де зібрані пошук, відеозв’язок, дошка й рейтинг. А при прямому бартері виникає страх: «А раптом я проведу 3 уроки, а партнер зникне і не навчить мене?».
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. SOLUTION & VALUE PROPOSITION SECTION ================= -->
+  <section id="solution" class="py-16 sm:py-24 bg-white border-y border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-emerald-600 font-bold text-sm uppercase tracking-wider">Наше рішення та цінність</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy-900 mt-2">
+          Як SkillSwap перетворює обмін знаннями на безпечну та зручну екосистему
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Кожна навичка — це актив. Інвестуйте свій час у навчання інших, щоб вчитися безкоштовно, або монетизуйте власну експертизу.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Solution 1 -->
+        <div class="rounded-3xl p-7 bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-blue-600 text-white flex items-center justify-center font-extrabold text-lg mb-5 shadow-md shadow-blue-600/20">
+              01
+            </div>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">
+              Бартер або класичне репетиторство
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Обирайте безкоштовний бартерний обмін «знання за знання» або бронюйте платні сесії з експертами з мінімальною комісією платформи — <strong class="text-navy-900">лише 1%</strong>.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-200 text-xs font-semibold text-blue-600">
+            Доступно навіть без стартового бюджету
+          </div>
+        </div>
+
+        <!-- Solution 2 -->
+        <div class="rounded-3xl p-7 bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-emerald-500 text-white flex items-center justify-center font-extrabold text-lg mb-5 shadow-md shadow-emerald-500/20">
+              02
+            </div>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">
+              Розумний алгоритм підбору (Матчинг)
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Спеціалізований алгоритм порівнює анкети за запитами («Хочу вивчити» ↔ «Можу навчити»), як у дейтинг-додатках, автоматично зводячи ідеальних партнерів.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-200 text-xs font-semibold text-emerald-600">
+            Миттєвий пошук за тегами та рівнем
+          </div>
+        </div>
+
+        <!-- Solution 3 -->
+        <div class="rounded-3xl p-7 bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-navy-800 text-white flex items-center justify-center font-extrabold text-lg mb-5 shadow-md">
+              03
+            </div>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">
+              Все для навчання в одному вікні
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Більше не потрібно стрибати між Zoom, Telegram і Miro. Вбудований чат, відеокімната, інтерактивна дошка та календар розкладу працюють прямо в SkillSwap.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-200 text-xs font-semibold text-navy-800">
+            Єдиний робочий простір для сесій
+          </div>
+        </div>
+
+        <!-- Solution 4 -->
+        <div class="rounded-3xl p-7 bg-slate-50 border border-slate-200/80 flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-blue-600 to-emerald-500 text-white flex items-center justify-center font-extrabold text-lg mb-5 shadow-md">
+              04
+            </div>
+            <h3 class="text-lg font-bold text-navy-900 mb-2">
+              Токени, Ескроу-захист та Рейтинг
+            </h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Кошти або внутрішні Skill-токени заморожуються платформою і списуються лише після підтвердження заняття обома сторонами. Плюс бейджі <strong class="text-navy-900">«Перевірений експерт»</strong> та реальні відгуки.
+            </p>
+          </div>
+          <div class="mt-5 pt-4 border-t border-slate-200 text-xs font-semibold text-blue-600">
+            Повний захист від недобросовісності
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 4. INTERACTIVE MVP PROTOTYPE SECTION ================= -->
+  <section id="prototype" class="py-16 sm:py-24 bg-navy-900 text-white relative overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-300 text-xs font-bold uppercase tracking-wider">
+          Інтерактивний MVP Прототип
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3">
+          Протестуйте SkillSwap прямо зараз
+        </h2>
+        <p class="text-slate-300 mt-2 text-sm sm:text-base">
+          Перемикайтеся між вкладками застосунку: підберіть партнера, забронюйте сесію з ескроу-заморожуванням токенів, помалюйте на інтерактивній дошці у відеокімнаті та перевірте профіль.
+        </p>
+      </div>
+
+      <!-- Browser / App Window Frame -->
+      <div class="bg-white text-slate-900 rounded-3xl shadow-2xl border border-white/15 overflow-hidden">
+        <!-- App Top Bar -->
+        <div class="bg-slate-900 text-white px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800">
+          <!-- Window Dots + App Title -->
+          <div class="flex items-center gap-3">
+            <div class="flex items-center gap-1.5">
+              <span class="w-3 h-3 rounded-full bg-red-500"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+            </div>
+            <div class="h-4 w-px bg-slate-700 hidden sm:block"></div>
+            <span class="text-xs sm:text-sm font-semibold text-slate-300">app.skillswap.ua — MVP v1.0</span>
+          </div>
+
+          <!-- Interactive Navigation Tabs -->
+          <div class="flex items-center gap-1.5 bg-slate-800 p-1 rounded-2xl w-full sm:w-auto justify-center">
+            <button onclick="switchAppTab('matching')" id="tab-btn-matching" class="app-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-blue-600 text-white shadow transition-all">
+              1. Підбір партнерів
+            </button>
+            <button onclick="switchAppTab('classroom')" id="tab-btn-classroom" class="app-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+              2. Навчальна кімната
+            </button>
+            <button onclick="switchAppTab('profile')" id="tab-btn-profile" class="app-tab-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-300 hover:text-white transition-all">
+              3. Профіль і Токени
+            </button>
+          </div>
+
+          <!-- Live Token Counter Badge -->
+          <div class="hidden lg:flex items-center gap-2 bg-slate-800/90 border border-slate-700 px-3.5 py-1.5 rounded-xl text-xs">
+            <span class="text-slate-400">Баланс:</span>
+            <span id="headerTokenBalance" class="font-bold text-emerald-400">120 ST</span>
+            <span class="text-slate-600">|</span>
+            <span class="text-amber-400 font-semibold" id="headerFrozenBalance">1 ST в ескроу</span>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 1: MATCHING ==================== -->
+        <div id="tab-matching" class="app-tab-panel p-5 sm:p-8 bg-slate-50">
+          <!-- Search & Filter Controls -->
+          <div class="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm mb-6 flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between">
+            <div class="relative flex-1">
+              <svg class="w-5 h-5 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <input
+                type="text"
+                id="skillSearchInput"
+                oninput="filterMentors()"
+                placeholder="Пошук за навичкою (напр. Python, Англійська, Figma, Математика, SMM)..."
+                class="w-full pl-11 pr-4 py-2.5 rounded-xl border border-slate-300 focus:border-blue-600 focus:ring-2 focus:ring-blue-600/20 outline-none text-sm"
+              />
+            </div>
+
+            <!-- Format Filter Pills -->
+            <div class="flex flex-wrap items-center gap-2">
+              <button onclick="setFormatFilter('all')" id="filter-all" class="format-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-navy-900 text-white transition-all">
+                Усі формати
+              </button>
+              <button onclick="setFormatFilter('barter')" id="filter-barter" class="format-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                Бартер (0 ₴ / Токени)
+              </button>
+              <button onclick="setFormatFilter('paid')" id="filter-paid" class="format-pill px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 text-slate-700 hover:bg-slate-200 transition-all">
+                Платні сесії
+              </button>
+            </div>
+          </div>
+
+          <!-- Mentors Grid -->
+          <div id="mentorsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Cards are dynamically rendered via JS -->
+          </div>
+        </div>
+
+        <!-- ==================== TAB 2: CLASSROOM (VIDEO + WHITEBOARD + CHAT) ==================== -->
+        <div id="tab-classroom" class="app-tab-panel hidden p-5 sm:p-8 bg-slate-100">
+          <!-- Active Session Banner -->
+          <div class="bg-white rounded-2xl p-4 mb-6 border border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+              <div>
+                <h3 class="font-bold text-navy-900 text-sm sm:text-base">Активна сесія: Олена Коваленко ↔ Ви (Бартерний обмін)</h3>
+                <p class="text-xs text-slate-500">Тема: Побудова компонентів у Figma • Статус ескроу: <span id="sessionEscrowStatus" class="font-semibold text-amber-600">1 Skill-токен заморожено</span></p>
+              </div>
+            </div>
+            <button onclick="completeSessionEscrow()" id="confirmSessionBtn" class="w-full sm:w-auto px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs sm:text-sm font-bold shadow transition-all">
+              ✓ Підтвердити завершення заняття
+            </button>
+          </div>
+
+          <div class="grid lg:grid-cols-12 gap-6">
+            <!-- Left 8 cols: Video Call + Interactive Canvas Whiteboard -->
+            <div class="lg:col-span-8 space-y-5">
+              <!-- Simulated Video Call Strip -->
+              <div class="grid grid-cols-2 gap-4">
+                <!-- Speaker 1 -->
+                <div class="relative rounded-2xl bg-navy-900 h-40 sm:h-48 overflow-hidden flex flex-col items-center justify-center border border-slate-700">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-blue-500 to-indigo-500 flex items-center justify-center text-white font-extrabold text-xl shadow-lg ring-4 ring-emerald-400/50">
+                    ОК
+                  </div>
+                  <p class="text-white font-semibold text-xs sm:text-sm mt-2">Олена Коваленко (Ментор)</p>
+                  <span class="text-[11px] text-emerald-400">● Говорить...</span>
+                  <span class="absolute top-3 right-3 px-2 py-0.5 rounded-md bg-black/50 text-white text-[10px]">HD Відео</span>
+                </div>
+                <!-- Speaker 2 (User) -->
+                <div class="relative rounded-2xl bg-slate-800 h-40 sm:h-48 overflow-hidden flex flex-col items-center justify-center border border-slate-700">
+                  <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-500 flex items-center justify-center text-white font-extrabold text-xl shadow-lg">
+                    ВИ
+                  </div>
+                  <p class="text-white font-semibold text-xs sm:text-sm mt-2">Ви (Учень / Партнер)</p>
+                  <span class="text-[11px] text-slate-400">Мікрофон увімкнено</span>
+                  <div class="absolute bottom-3 flex gap-2">
+                    <span class="p-1.5 rounded-lg bg-white/10 text-white text-xs">🎤</span>
+                    <span class="p-1.5 rounded-lg bg-white/10 text-white text-xs">📹</span>
+                    <span class="p-1.5 rounded-lg bg-white/10 text-white text-xs">🖥️</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Interactive HTML5 Canvas Whiteboard -->
+              <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                <div class="px-4 py-3 bg-slate-50 border-b border-slate-200 flex flex-wrap items-center justify-between gap-2">
+                  <span class="text-xs sm:text-sm font-bold text-navy-900 flex items-center gap-2">
+                    ✏️ Інтерактивна онлайн-дошка (помалюйте мишкою або пальцем)
+                  </span>
+                  <div class="flex items-center gap-2">
+                    <button onclick="setBrushColor('#2563EB')" class="w-6 h-6 rounded-full bg-blue-600 ring-2 ring-offset-1 ring-blue-600" title="Синій маркер"></button>
+                    <button onclick="setBrushColor('#10B981')" class="w-6 h-6 rounded-full bg-emerald-500 hover:scale-110 transition-transform" title="Зелений маркер"></button>
+                    <button onclick="setBrushColor('#0F172A')" class="w-6 h-6 rounded-full bg-slate-900 hover:scale-110 transition-transform" title="Чорний маркер"></button>
+                    <button onclick="clearWhiteboard()" class="ml-2 px-3 py-1 rounded-lg bg-slate-200 hover:bg-slate-300 text-slate-700 text-xs font-semibold transition-colors">
+                      Очистити
+                    </button>
+                  </div>
+                </div>
+                <div class="relative w-full h-56 sm:h-64 bg-white cursor-crosshair">
+                  <canvas id="whiteboardCanvas" class="w-full h-full block touch-none"></canvas>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right 4 cols: Live Interactive Chat -->
+            <div class="lg:col-span-4 bg-white rounded-2xl border border-slate-200 shadow-sm flex flex-col h-[470px]">
+              <div class="px-4 py-3.5 border-b border-slate-200 flex items-center justify-between">
+                <h4 class="font-bold text-navy-900 text-sm">Чат заняття</h4>
+                <span class="text-xs text-emerald-600 font-semibold">● В мережі</span>
+              </div>
+
+              <div id="chatMessages" class="flex-1 p-4 space-y-3 overflow-y-auto custom-scroll text-sm">
+                <div class="bg-slate-100 rounded-2xl rounded-tl-none p-3 max-w-[85%]">
+                  <p class="text-[11px] font-bold text-blue-600 mb-0.5">Олена Коваленко</p>
+                  <p class="text-slate-700 text-xs sm:text-sm">Привіт! Я вже відкрила дошку. Намалюй, будь ласка, схему екрану, яку хочеш розібрати 👇</p>
+                </div>
+                <div class="bg-blue-600 text-white rounded-2xl rounded-tr-none p-3 max-w-[85%] ml-auto">
+                  <p class="text-xs sm:text-sm">Привіт! Супер, зараз накидаю макет на дошці. А після цього розберемо твою англійську!</p>
+                </div>
+              </div>
+
+              <form onsubmit="sendChatMessage(event)" class="p-3 border-t border-slate-200 flex gap-2">
+                <input
+                  type="text"
+                  id="chatInput"
+                  placeholder="Написати повідомлення..."
+                  class="flex-1 px-3.5 py-2 rounded-xl border border-slate-300 text-xs sm:text-sm focus:outline-none focus:border-blue-600"
+                />
+                <button type="submit" class="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs sm:text-sm font-semibold transition-colors">
+                  Надіслати
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================== TAB 3: PROFILE & TOKENS ==================== -->
+        <div id="tab-profile" class="app-tab-panel hidden p-5 sm:p-8 bg-slate-50">
+          <div class="grid lg:grid-cols-12 gap-6">
+            <!-- User Summary Card -->
+            <div class="lg:col-span-5 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm space-y-5">
+              <div class="flex items-center gap-4">
+                <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-blue-600 to-emerald-500 text-white flex items-center justify-center font-extrabold text-2xl">
+                  АБ
+                </div>
+                <div>
+                  <h3 class="text-lg font-extrabold text-navy-900">Андрій Бондаренко</h3>
+                  <p class="text-xs text-slate-500">Студент КПІ • Фрілансер-початківець</p>
+                  <div class="flex items-center gap-2 mt-1.5">
+                    <span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700 text-xs font-bold">Рівень: Практик (Lvl 4)</span>
+                    <span class="text-amber-500 font-bold text-xs">★ 4.95</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Progress Bar to Next Mastery Level -->
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200/80">
+                <div class="flex justify-between text-xs font-semibold mb-1.5">
+                  <span class="text-slate-600">Прогрес до рівня «Ментор Про»</span>
+                  <span class="text-blue-600">75% (15 / 20 сесій)</span>
+                </div>
+                <div class="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden">
+                  <div class="h-full bg-gradient-to-r from-blue-600 to-emerald-500 rounded-full" style="width: 75%"></div>
+                </div>
+                <p class="text-[11px] text-slate-500 mt-2">
+                  Проводьте бартерні заняття, щоб «набити» перші перевірені відгуки та підвищити свій чек на ринку!
+                </p>
+              </div>
+
+              <!-- Badges -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Отримані бейджі довіри</h4>
+                <div class="flex flex-wrap gap-2">
+                  <span class="px-3 py-1.5 rounded-xl bg-blue-50 text-blue-700 border border-blue-200 text-xs font-semibold">
+                    🛡️ Перевірений експерт (Python)
+                  </span>
+                  <span class="px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold">
+                    🤝 10+ успішних бартерів
+                  </span>
+                  <span class="px-3 py-1.5 rounded-xl bg-amber-50 text-amber-700 border border-amber-200 text-xs font-semibold">
+                    ⚡ Швидка відповідь
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Token Wallet & Escrow Mechanics -->
+            <div class="lg:col-span-7 bg-white rounded-2xl p-6 border border-slate-200 shadow-sm flex flex-col justify-between">
+              <div>
+                <h3 class="text-lg font-extrabold text-navy-900 mb-1">Гаманець внутрішньої валюти (Skill-токени)</h3>
+                <p class="text-xs sm:text-sm text-slate-500 mb-5">
+                  Альтернатива прямому бартеру: навчайте інших, накопичуйте токени та витрачайте їх на уроки в будь-якого ментора платформи.
+                </p>
+
+                <div class="grid sm:grid-cols-2 gap-4 mb-6">
+                  <div class="p-4 rounded-2xl bg-navy-900 text-white">
+                    <span class="text-xs text-slate-400">Доступний баланс</span>
+                    <p id="profileAvailableTokens" class="text-3xl font-extrabold text-emerald-400 mt-1">120 ST</p>
+                    <p class="text-[11px] text-slate-300 mt-1">10 ST = 1 година навчання</p>
+                  </div>
+                  <div class="p-4 rounded-2xl bg-amber-50 border border-amber-200">
+                    <span class="text-xs text-amber-800 font-semibold">Заморожено в Ескроу</span>
+                    <p id="profileFrozenTokens" class="text-3xl font-extrabold text-amber-600 mt-1">1 ST</p>
+                    <p class="text-[11px] text-amber-700 mt-1">Спишеться після підтвердження сесії</p>
+                  </div>
+                </div>
+
+                <!-- Transaction History -->
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Останні операції</h4>
+                <div id="tokenHistoryList" class="space-y-2.5 text-xs sm:text-sm">
+                  <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+                    <div>
+                      <p class="font-semibold text-navy-900">Проведено урок: Основи Python для початківців</p>
+                      <p class="text-xs text-slate-500">Підтверджено учнем • Відгук ★★★★★</p>
+                    </div>
+                    <span class="font-bold text-emerald-600">+10 ST</span>
+                  </div>
+                  <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200/70">
+                    <div>
+                      <p class="font-semibold text-navy-900">Бронювання сесії з Оленою Коваленко (Figma)</p>
+                      <p class="text-xs text-slate-500">Статус: Заморожено платформою (Ескроу)</p>
+                    </div>
+                    <span class="font-bold text-amber-600">-1 ST (Холд)</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= BOOKING / ESCROW MODAL ================= -->
+  <div id="bookingModal" class="fixed inset-0 z-50 hidden bg-navy-900/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-200 animate-[fadeIn_0.2s_ease-out]">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-xl font-extrabold text-navy-900">Бронювання сесії</h3>
+        <button onclick="closeBookingModal()" class="p-1.5 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100">
+          ✕
+        </button>
+      </div>
+
+      <div id="modalMentorInfo" class="p-4 rounded-2xl bg-slate-50 border border-slate-200 mb-4">
+        <!-- Populated dynamically -->
+      </div>
+
+      <div class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Оберіть дату та час заняття</label>
+          <input type="datetime-local" id="bookingDateTime" value="2026-11-20T18:00" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-blue-600" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Формат розрахунку</label>
+          <select id="bookingFormatSelect" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-blue-600">
+            <option value="barter">Бартер «Знання за знання» (Заморожування 10 ST в ескроу)</option>
+            <option value="paid">Платна сесія (250 ₴ + 1% комісія через безпечну угоду)</option>
+          </select>
+        </div>
+
+        <div class="p-3.5 rounded-xl bg-blue-50 border border-blue-200 text-xs text-blue-900 leading-relaxed">
+          <strong>Як працює Ескроу-захист SkillSwap:</strong> Ваші токени або кошти заморожуються платформою і передаються ментору <strong>лише після того, як обидві сторони підтвердять</strong>, що заняття відбулося.
+        </div>
+
+        <div class="flex gap-3 pt-2">
+          <button onclick="closeBookingModal()" class="flex-1 py-3 rounded-xl border border-slate-300 text-slate-700 font-semibold text-sm hover:bg-slate-50">
+            Скасувати
+          </button>
+          <button onclick="confirmBooking()" class="flex-1 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg shadow-blue-600/25">
+            Підтвердити бронь
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= 5. TARGET SEGMENTS & KEY ADVANTAGES ================= -->
+  <section id="audience" class="py-16 sm:py-24 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14">
+        <span class="text-blue-600 font-bold text-sm uppercase tracking-wider">Цільова аудиторія та переваги</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-navy-900 mt-2">
+          Для кого створений SkillSwap?
+        </h2>
+        <p class="text-slate-600 mt-3 text-base sm:text-lg">
+          Кожен користувач нашої платформи може бути одночасно і допитливим учнем, і наставником у своїй сфері.
+        </p>
+      </div>
+
+      <!-- 4 Audience Cards -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-14">
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-2xl mb-4">
+            🎓
+          </div>
+          <h3 class="text-lg font-bold text-navy-900 mb-2">Студенти та школярі</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Підготовка до іспитів, вивчення мов чи програмування без витрат — в обмін на допомогу з предметами, які ви знаєте на відмінно.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-2xl mb-4">
+            🚀
+          </div>
+          <h3 class="text-lg font-bold text-navy-900 mb-2">Початківці в нових сферах</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Швидкий вхід в IT, дизайн або маркетинг завдяки практичним порадам від однодумців та прокачуванню soft skills комунікації.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-2xl mb-4">
+            💻
+          </div>
+          <h3 class="text-lg font-bold text-navy-900 mb-2">Фрілансери</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Можливість за місяць закрити 3–4 суміжні прогалини в навичках за бартером і суттєво підвищити свій чек на ринку праці.
+          </p>
+        </div>
+
+        <div class="bg-white rounded-3xl p-6 border border-slate-200/80 shadow-sm">
+          <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-2xl mb-4">
+            ⭐
+          </div>
+          <h3 class="text-lg font-bold text-navy-900 mb-2">Репетитори та експерти</h3>
+          <p class="text-sm text-slate-600 leading-relaxed">
+            Легальний старт кар’єри ментора: напрацюйте перші реальні відгуки через бартер, а далі монетизуйте заняття з комісією ≤ 1%.
+          </p>
+        </div>
+      </div>
+
+      <!-- Key Advantages Banner -->
+      <div class="bg-gradient-to-r from-navy-900 via-navy-800 to-navy-900 rounded-3xl p-8 sm:p-10 text-white shadow-xl">
+        <div class="grid md:grid-cols-3 gap-8 items-center">
+          <div>
+            <span class="text-emerald-400 text-xs font-bold uppercase tracking-wider">Чому обирають нас</span>
+            <h3 class="text-2xl font-extrabold mt-1">Ключові переваги платформи</h3>
+          </div>
+          <div class="md:col-span-2 grid sm:grid-cols-3 gap-5">
+            <div class="bg-white/10 rounded-2xl p-4 border border-white/10">
+              <p class="text-emerald-400 font-extrabold text-lg">≤ 1% комісія</p>
+              <p class="text-xs text-slate-300 mt-1">Найнижча комісія на ринку репетиторства, а бартер — 0 ₴.</p>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-4 border border-white/10">
+              <p class="text-blue-400 font-extrabold text-lg">Ескроу-токени</p>
+              <p class="text-xs text-slate-300 mt-1">Заморожування балів чи коштів гарантує проведення уроку.</p>
+            </div>
+            <div class="bg-white/10 rounded-2xl p-4 border border-white/10">
+              <p class="text-amber-400 font-extrabold text-lg">Гейміфікація</p>
+              <p class="text-xs text-slate-300 mt-1">Рівні «Майстерності», бейджі експертів та бонуси за активність.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 6. EARLY ACCESS REGISTRATION & FOOTER ================= -->
+  <section id="register" class="py-16 sm:py-24 bg-white border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-12 gap-12 items-start">
+        <!-- Left Info & Contacts -->
+        <div class="lg:col-span-5 space-y-6">
+          <span class="text-emerald-600 font-bold text-sm uppercase tracking-wider">Ранній доступ (Beta)</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-navy-900">
+            Стань одним із перших користувачів SkillSwap
+          </h2>
+          <p class="text-slate-600 leading-relaxed">
+            Заповніть коротку анкету, щоб отримати бонусні <strong class="text-navy-900">+50 Skill-токенів</strong> на старті та першим знайти партнерів для обміну знаннями.
+          </p>
+
+          <!-- Contact & Team Card -->
+          <div class="bg-slate-50 rounded-3xl p-6 border border-slate-200 space-y-4">
+            <h3 class="font-bold text-navy-900 text-base">Контакти та команда проєкту</h3>
+            <div class="space-y-2.5 text-sm text-slate-600">
+              <p class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold">✉️</span>
+                <span>hello@skillswap.ua</span>
+              </p>
+              <p class="flex items-center gap-2.5">
+                <span class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-bold">✈️</span>
+                <a href="#register" class="text-blue-600 font-semibold hover:underline">@skillswap_ua_community</a>
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200">
+              <p class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Команда стартапу</p>
+              <ul class="space-y-1.5 text-xs text-slate-600">
+                <li><strong class="text-navy-900">PM:</strong> Управління проєктом та фінанси (Project Manager / Financier)</li>
+                <li><strong class="text-navy-900">DEV:</strong> Технічна розробка (Fullstack / Frontend & Backend)</li>
+                <li><strong class="text-navy-900">DES:</strong> Дизайн та маркетинг (UI/UX Designer & SMM)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Registration Form -->
+        <div class="lg:col-span-7">
+          <div class="bg-navy-900 text-white rounded-3xl p-7 sm:p-10 shadow-2xl">
+            <form id="earlyAccessForm" onsubmit="handleEarlyAccessSubmit(event)" class="space-y-5">
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="userName" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Ваше ім'я *</label>
+                  <input
+                    type="text"
+                    id="userName"
+                    required
+                    placeholder="Наприклад: Тарас Шевченко"
+                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+                <div>
+                  <label for="userContact" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Email або Telegram *</label>
+                  <input
+                    type="text"
+                    id="userContact"
+                    required
+                    placeholder="@username або email@gmail.com"
+                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Оберіть вашу роль на платформі *</label>
+                <div class="grid grid-cols-3 gap-3">
+                  <label class="cursor-pointer">
+                    <input type="radio" name="userRole" value="Учень" class="peer sr-only" />
+                    <div class="text-center py-3 px-2 rounded-xl bg-white/10 border border-white/15 text-xs sm:text-sm font-semibold peer-checked:bg-blue-600 peer-checked:border-blue-500 transition-all">
+                      📚 Учень
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="userRole" value="Ментор" class="peer sr-only" />
+                    <div class="text-center py-3 px-2 rounded-xl bg-white/10 border border-white/15 text-xs sm:text-sm font-semibold peer-checked:bg-blue-600 peer-checked:border-blue-500 transition-all">
+                      🎓 Ментор
+                    </div>
+                  </label>
+                  <label class="cursor-pointer">
+                    <input type="radio" name="userRole" value="Обидва (Бартер)" class="peer sr-only" checked />
+                    <div class="text-center py-3 px-2 rounded-xl bg-white/10 border border-white/15 text-xs sm:text-sm font-semibold peer-checked:bg-emerald-500 peer-checked:text-navy-900 peer-checked:border-emerald-400 transition-all">
+                      🔄 Обидва (Бартер)
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="grid sm:grid-cols-2 gap-5">
+                <div>
+                  <label for="skillTeach" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Чому ви можете навчити? *</label>
+                  <input
+                    type="text"
+                    id="skillTeach"
+                    required
+                    placeholder="Напр.: Python, Математика, Гітара"
+                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+                <div>
+                  <label for="skillLearn" class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Чому хочете навчитися? *</label>
+                  <input
+                    type="text"
+                    id="skillLearn"
+                    required
+                    placeholder="Напр.: Англійська B2, UI/UX Figma"
+                    class="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/15 text-white placeholder-slate-400 text-sm focus:outline-none focus:border-emerald-400"
+                  />
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                class="w-full py-4 rounded-2xl bg-gradient-to-r from-blue-600 to-emerald-500 hover:opacity-95 text-white font-extrabold text-base shadow-xl transition-all"
+              >
+                Отримати ранній доступ та +50 Skill-токенів
+              </button>
+            </form>
+
+            <!-- Instant Confirmation Message Box (Hidden by default) -->
+            <div id="formSuccessBox" class="hidden text-center py-8 space-y-4">
+              <div class="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-3xl mx-auto">
+                ✓
+              </div>
+              <h3 class="text-2xl font-extrabold text-white">Заявку успішно прийнято!</h3>
+              <p id="formSuccessDetails" class="text-slate-300 text-sm max-w-md mx-auto leading-relaxed"></p>
+              <button onclick="resetEarlyAccessForm()" class="px-5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 text-xs font-semibold text-white">
+                Зареєструвати ще одного учасника
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-navy-900 text-slate-400 py-8 border-t border-white/10 text-xs sm:text-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2.5 text-white font-bold">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+        <span>SkillSwap</span>
+        <span class="text-slate-500 font-normal">— Вчись, обмінюйся, зростай!</span>
+      </div>
+      <p>© 2026 Стартап-проєкт SkillSwap. Усі права захищено.</p>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Banner -->
+  <div id="toastNotification" class="fixed bottom-5 right-5 z-50 hidden bg-navy-900 text-white px-5 py-3.5 rounded-2xl shadow-2xl border border-emerald-500/40 text-xs sm:text-sm font-medium flex items-center gap-3">
+    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+    <span id="toastText">Повідомлення</span>
+  </div>
+
+  <!-- ================= INTERACTIVE JAVASCRIPT ================= -->
+  <script>
+    // 1. Mobile Navigation Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // 2. Mock Data for MVP Matching Tab
+    const mentorsData = [
+      {
+        id: 1,
+        initials: 'ОК',
+        gradient: 'from-blue-600 to-indigo-600',
+        name: 'Олена Коваленко',
+        role: 'Product Designer',
+        verified: true,
+        rating: '4.9',
+        reviews: 24,
+        teaches: 'UI/UX Дизайн, Figma, Прототипування',
+        wants: 'Розмовна Англійська B2',
+        format: 'barter',
+        priceLabel: 'Бартер (0 ₴ / 10 ST)',
+        matchScore: '98%'
+      },
+      {
+        id: 2,
+        initials: 'МТ',
+        gradient: 'from-emerald-600 to-teal-600',
+        name: 'Максим Ткаченко',
+        role: 'Middle Python Developer',
+        verified: true,
+        rating: '5.0',
+        reviews: 31,
+        teaches: 'Python, FastAPI, SQL, Backend',
+        wants: 'Графічний дизайн або Платна сесія',
+        format: 'paid',
+        priceLabel: 'Бартер або 250 ₴/год',
+        matchScore: '94%'
+      },
+      {
+        id: 3,
+        initials: 'СМ',
+        gradient: 'from-indigo-500 to-purple-600',
+        name: 'Софія Мельник',
+        role: 'Викладач англійської (IELTS 7.5)',
+        verified: true,
+        rating: '5.0',
+        reviews: 18,
+        teaches: 'Розмовна Англійська, Підготовка до НМТ',
+        wants: 'Основи SMM та таргетинг',
+        format: 'barter',
+        priceLabel: 'Бартер (0 ₴ / 10 ST)',
+        matchScore: '96%'
+      },
+      {
+        id: 4,
+        initials: 'ДЛ',
+        gradient: 'from-sky-500 to-blue-600',
+        name: 'Дмитро Лисенко',
+        role: 'Репетитор з математики',
+        verified: true,
+        rating: '4.8',
+        reviews: 42,
+        teaches: 'Вища математика, Алгебра, Геометрія',
+        wants: 'Основи JavaScript / Frontend',
+        format: 'paid',
+        priceLabel: '200 ₴/год (комісія 1%)',
+        matchScore: '91%'
+      },
+      {
+        id: 5,
+        initials: 'АК',
+        gradient: 'from-teal-500 to-emerald-600',
+        name: 'Аліна Кравець',
+        role: 'SMM-спеціалістка та копірайтер',
+        verified: false,
+        rating: '4.9',
+        reviews: 9,
+        teaches: 'SMM, Контент-стратегія, TikTok/Reels',
+        wants: 'Монтаж відео або Англійська A2-B1',
+        format: 'barter',
+        priceLabel: 'Бартер (0 ₴ / 10 ST)',
+        matchScore: '89%'
+      },
+      {
+        id: 6,
+        initials: 'ІП',
+        gradient: 'from-blue-700 to-navy-800',
+        name: 'Ігор Поліщук',
+        role: 'Frontend Developer (React/TS)',
+        verified: true,
+        rating: '4.95',
+        reviews: 27,
+        teaches: 'HTML/CSS, JavaScript, React',
+        wants: 'Польська мова або Бартер за токени',
+        format: 'barter',
+        priceLabel: 'Бартер (10 ST / год)',
+        matchScore: '95%'
+      }
+    ];
+
+    let currentFormat = 'all';
+    let availableTokens = 120;
+    let frozenTokens = 1;
+    let selectedMentor = null;
+
+    function renderMentors(list) {
+      const grid = document.getElementById('mentorsGrid');
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full text-center py-12 bg-white rounded-2xl border border-slate-200">
+            <p class="text-slate-600 font-semibold">За вашим запитом партнерів не знайдено.</p>
+            <p class="text-xs text-slate-400 mt-1">Спробуйте інший запит, наприклад: Python, Англійська або Figma.</p>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(m => `
+        <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div class="flex items-start justify-between gap-2 mb-3">
+              <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-br ${m.gradient} text-white flex items-center justify-center font-bold text-base shrink-0">
+                  ${m.initials}
+                </div>
+                <div>
+                  <h4 class="font-bold text-navy-900 text-base leading-tight">${m.name}</h4>
+                  <p class="text-xs text-slate-500">${m.role}</p>
+                </div>
+              </div>
+              <span class="px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-[11px] font-bold shrink-0">
+                ${m.matchScore} Match
+              </span>
+            </div>
+
+            <div class="flex items-center gap-2 mb-4 text-xs">
+              <span class="text-amber-500 font-bold">★ ${m.rating} (${m.reviews})</span>
+              ${m.verified
+                ? '<span class="px-2 py-0.5 rounded-md bg-blue-50 text-blue-700 font-semibold">✓ Перевірений експерт</span>'
+                : '<span class="px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 font-medium">Новачок-ментор</span>'}
+            </div>
+
+            <div class="space-y-2 text-xs bg-slate-50 p-3.5 rounded-xl border border-slate-200/70 mb-4">
+              <p class="text-slate-600"><span class="font-bold text-emerald-700">Навчить:</span> ${m.teaches}</p>
+              <p class="text-slate-600"><span class="font-bold text-blue-700">Шукає:</span> ${m.wants}</p>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+            <span class="text-xs font-extrabold text-navy-900">${m.priceLabel}</span>
+            <button
+              onclick="openBookingModal(${m.id})"
+              class="px-3.5 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold transition-colors"
+            >
+              Забронювати
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function setFormatFilter(format) {
+      currentFormat = format;
+      document.querySelectorAll('.format-pill').forEach(btn => {
+        btn.classList.remove('bg-navy-900', 'text-white');
+        btn.classList.add('bg-slate-100', 'text-slate-700');
+      });
+      const activeBtn = document.getElementById(`filter-${format}`);
+      activeBtn.classList.remove('bg-slate-100', 'text-slate-700');
+      activeBtn.classList.add('bg-navy-900', 'text-white');
+      filterMentors();
+    }
+
+    function filterMentors() {
+      const query = document.getElementById('skillSearchInput').value.toLowerCase().trim();
+      const filtered = mentorsData.filter(m => {
+        const matchesFormat = currentFormat === 'all' || m.format === currentFormat;
+        const matchesQuery =
+          !query ||
+          m.teaches.toLowerCase().includes(query) ||
+          m.wants.toLowerCase().includes(query) ||
+          m.name.toLowerCase().includes(query);
+        return matchesFormat && matchesQuery;
+      });
+      renderMentors(filtered);
+    }
+
+    // 3. App Tab Switching
+    function switchAppTab(tabName) {
+      document.querySelectorAll('.app-tab-panel').forEach(panel => panel.classList.add('hidden'));
+      document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+
+      document.querySelectorAll('.app-tab-btn').forEach(btn => {
+        btn.classList.remove('bg-blue-600', 'text-white', 'shadow');
+        btn.classList.add('text-slate-300');
+      });
+      const activeTabBtn = document.getElementById(`tab-btn-${tabName}`);
+      activeTabBtn.classList.remove('text-slate-300');
+      activeTabBtn.classList.add('bg-blue-600', 'text-white', 'shadow');
+
+      if (tabName === 'classroom') {
+        resizeWhiteboard();
+      }
+    }
+
+    // 4. Booking Modal & Escrow Simulation
+    function openBookingModal(mentorId) {
+      selectedMentor = mentorsData.find(m => m.id === mentorId);
+      if (!selectedMentor) return;
+
+      document.getElementById('modalMentorInfo').innerHTML = `
+        <p class="text-xs text-slate-500">Обраний партнер</p>
+        <p class="font-bold text-navy-900 text-base">${selectedMentor.name} (${selectedMentor.role})</p>
+        <p class="text-xs text-emerald-700 font-semibold mt-1">Напрямок: ${selectedMentor.teaches}</p>
+      `;
+      document.getElementById('bookingModal').classList.remove('hidden');
+    }
+
+    function closeBookingModal() {
+      document.getElementById('bookingModal').classList.add('hidden');
+    }
+
+    function confirmBooking() {
+      if (!selectedMentor) return;
+      if (availableTokens >= 10) {
+        availableTokens -= 10;
+        frozenTokens += 10;
+        updateTokenDisplays();
+
+        const historyList = document.getElementById('tokenHistoryList');
+        const newItem = document.createElement('div');
+        newItem.className = 'flex items-center justify-between p-3 rounded-xl bg-amber-50/70 border border-amber-200';
+        newItem.innerHTML = `
+          <div>
+            <p class="font-semibold text-navy-900">Нове бронювання: ${selectedMentor.name}</p>
+            <p class="text-xs text-amber-700">Статус: Заморожено в Ескроу до підтвердження уроку</p>
+          </div>
+          <span class="font-bold text-amber-600">-10 ST (Холд)</span>
+        `;
+        historyList.prepend(newItem);
+      }
+
+      closeBookingModal();
+      showToast(`Сесію з ${selectedMentor.name} заброньовано! Токени заморожено в Ескроу.`);
+    }
+
+    function completeSessionEscrow() {
+      if (frozenTokens > 0) {
+        const released = frozenTokens;
+        frozenTokens = 0;
+        updateTokenDisplays();
+        document.getElementById('sessionEscrowStatus').textContent = 'Заняття підтверджено! Токени переказано ментору.';
+        document.getElementById('sessionEscrowStatus').className = 'font-semibold text-emerald-600';
+        const btn = document.getElementById('confirmSessionBtn');
+        btn.textContent = '✓ Сесію підтверджено';
+        btn.disabled = true;
+        btn.classList.replace('bg-emerald-600', 'bg-slate-400');
+        showToast(`Угоду завершено! ${released} ST безпечно переказано партнеру.`);
+      } else {
+        showToast('Усі активні токени в цій сесії вже підтверджені!');
+      }
+    }
+
+    function updateTokenDisplays() {
+      document.getElementById('headerTokenBalance').textContent = `${availableTokens} ST`;
+      document.getElementById('headerFrozenBalance').textContent = `${frozenTokens} ST в ескроу`;
+      document.getElementById('profileAvailableTokens').textContent = `${availableTokens} ST`;
+      document.getElementById('profileFrozenTokens').textContent = `${frozenTokens} ST`;
+    }
+
+    // 5. Interactive HTML5 Canvas Whiteboard
+    const canvas = document.getElementById('whiteboardCanvas');
+    const ctx = canvas.getContext('2d');
+    let isDrawing = false;
+    let brushColor = '#2563EB';
+
+    function resizeWhiteboard() {
+      const rect = canvas.parentElement.getBoundingClientRect();
+      if (rect.width > 0 && rect.height > 0) {
+        canvas.width = rect.width;
+        canvas.height = rect.height;
+        drawInitialGridAndHint();
+      }
+    }
+
+    function drawInitialGridAndHint() {
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Subtle dot grid
+      ctx.fillStyle = '#CBD5E1';
+      for (let x = 20; x < canvas.width; x += 24) {
+        for (let y = 20; y < canvas.height; y += 24) {
+          ctx.beginPath();
+          ctx.arc(x, y, 1, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      // Sample wireframe sketch on board
+      ctx.strokeStyle = '#2563EB';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(28, 28, 150, 95);
+      ctx.font = '600 12px Inter, sans-serif';
+      ctx.fillStyle = '#2563EB';
+      ctx.fillText('Auto Layout Card', 42, 52);
+
+      ctx.strokeStyle = '#10B981';
+      ctx.strokeRect(42, 65, 120, 24);
+      ctx.fillStyle = '#10B981';
+      ctx.fillText('Button Component', 50, 81);
+    }
+
+    function setBrushColor(color) {
+      brushColor = color;
+    }
+
+    function clearWhiteboard() {
+      drawInitialGridAndHint();
+      showToast('Дошку очищено');
+    }
+
+    function getCanvasCoords(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      return {
+        x: clientX - rect.left,
+        y: clientY - rect.top
+      };
+    }
+
+    canvas.addEventListener('mousedown', (e) => {
+      isDrawing = true;
+      const pos = getCanvasCoords(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    });
+
+    canvas.addEventListener('mousemove', (e) => {
+      if (!isDrawing) return;
+      const pos = getCanvasCoords(e);
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = brushColor;
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDrawing = false;
+    });
+
+    // Touch events for mobile drawing
+    canvas.addEventListener('touchstart', (e) => {
+      isDrawing = true;
+      const pos = getCanvasCoords(e);
+      ctx.beginPath();
+      ctx.moveTo(pos.x, pos.y);
+    }, { passive: true });
+
+    canvas.addEventListener('touchmove', (e) => {
+      if (!isDrawing) return;
+      const pos = getCanvasCoords(e);
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.strokeStyle = brushColor;
+      ctx.lineTo(pos.x, pos.y);
+      ctx.stroke();
+    }, { passive: true });
+
+    canvas.addEventListener('touchend', () => {
+      isDrawing = false;
+    });
+
+    window.addEventListener('resize', () => {
+      if (!document.getElementById('tab-classroom').classList.contains('hidden')) {
+        resizeWhiteboard();
+      }
+    });
+
+    // 6. Live Chat in Classroom Tab
+    function sendChatMessage(e) {
+      e.preventDefault();
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const chatBox = document.getElementById('chatMessages');
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'bg-blue-600 text-white rounded-2xl rounded-tr-none p-3 max-w-[85%] ml-auto';
+      msgDiv.innerHTML = `<p class="text-xs sm:text-sm"></p>`;
+      msgDiv.querySelector('p').textContent = text;
+      chatBox.appendChild(msgDiv);
+      chatBox.scrollTop = chatBox.scrollHeight;
+      input.value = '';
+    }
+
+    // 7. Early Access Registration Form Handler
+    function handleEarlyAccessSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('userName').value.trim();
+      const contact = document.getElementById('userContact').value.trim();
+      const role = document.querySelector('input[name="userRole"]:checked').value;
+      const teach = document.getElementById('skillTeach').value.trim();
+      const learn = document.getElementById('skillLearn').value.trim();
+
+      document.getElementById('earlyAccessForm').classList.add('hidden');
+      const successBox = document.getElementById('formSuccessBox');
+      successBox.classList.remove('hidden');
+
+      document.getElementById('formSuccessDetails').innerHTML = `
+        Дякуємо, <strong class="text-white">${name}</strong>! Ми зарезервували для вас місце у закритій беті (роль: <strong class="text-emerald-400">${role}</strong>) та нарахували <strong class="text-emerald-400">+50 ST</strong>.<br/>
+        Ваш профіль обміну: <span class="text-blue-300">${teach}</span> ↔ <span class="text-emerald-300">${learn}</span>.<br/>
+        Запрошення надішлемо на <strong>${contact}</strong>.
+      `;
+      showToast('Реєстрацію в ранньому доступі підтверджено!');
+    }
+
+    function resetEarlyAccessForm() {
+      document.getElementById('earlyAccessForm').reset();
+      document.getElementById('formSuccessBox').classList.add('hidden');
+      document.getElementById('earlyAccessForm').classList.remove('hidden');
+    }
+
+    // 8. Toast Notification Helper
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById('toastNotification');
+      document.getElementById('toastText').textContent = message;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 3500);
+    }
+
+    // Initialize initial mentors list on load
+    window.addEventListener('DOMContentLoaded', () => {
+      renderMentors(mentorsData);
+    });
+  </script>
+</body>
+</html>
